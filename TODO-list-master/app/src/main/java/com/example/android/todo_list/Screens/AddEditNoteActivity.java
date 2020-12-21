@@ -1,6 +1,8 @@
 package com.example.android.todo_list.Screens;
 
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,6 +24,14 @@ public class AddEditNoteActivity extends AppCompatActivity {
     NumberPicker numberPicker;
     String prio;
     String repeat;
+
+
+    // notification
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"newnot")
+            .setSmallIcon(R.drawable.s)
+            .setContentTitle("Task Created")
+            .setContentText("Task Desc")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 
     @Override
@@ -46,17 +56,17 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        Toast.makeText(parent.getContext(), "Spinner item 1!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Prioity:Low", Toast.LENGTH_SHORT).show();
                         spinner.setSelection(position);
                         prio="Low";
                         break;
                     case 1:
-                        Toast.makeText(parent.getContext(), "Spinner item 2!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Prioity:Medium", Toast.LENGTH_SHORT).show();
                         spinner.setSelection(position);
                         prio="Medium";
                         break;
                     case 2:
-                        Toast.makeText(parent.getContext(), "Spinner item 3!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Prioity:High", Toast.LENGTH_SHORT).show();
                         spinner.setSelection(position);
                         prio="High";
                         break;
@@ -86,17 +96,17 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        Toast.makeText(parent.getContext(), "Spinner item 1!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Repeat:Daily", Toast.LENGTH_SHORT).show();
                         spinner2.setSelection(position);
                         repeat="Daily";
                         break;
                     case 1:
-                        Toast.makeText(parent.getContext(), "Spinner item 2!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Repeat:Weekly", Toast.LENGTH_SHORT).show();
                         spinner2.setSelection(position);
                         repeat="Weekly";
                         break;
                     case 2:
-                        Toast.makeText(parent.getContext(), "Spinner item 3!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(parent.getContext(), "Repeat:Monthly", Toast.LENGTH_SHORT).show();
                         spinner2.setSelection(position);
                         repeat="Monthlty";
                         break;
@@ -111,6 +121,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
             }
         });
 
+        //notification
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow);
 
@@ -163,7 +174,15 @@ public class AddEditNoteActivity extends AppCompatActivity {
         if (id != -1){
             intent.putExtra("id",id);
         }
+        //notificaion
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(10, builder.build());
+
         setResult(RESULT_OK, intent);
         finish();
+
     }
 }

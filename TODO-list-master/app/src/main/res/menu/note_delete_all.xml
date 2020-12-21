@@ -5,4 +5,7 @@
         android:id="@+id/notes_delete"
         android:title="Delete All Notes"
         app:showAsAction="never"></item>
+    <item
+        android:id="@+id/about"
+        android:title="About" />
 </menu>

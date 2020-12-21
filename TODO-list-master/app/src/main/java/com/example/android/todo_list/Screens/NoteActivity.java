@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.android.todo_list.About;
 import com.example.android.todo_list.R;
 import com.example.android.todo_list.Screens.Adapters.NoteAdapter;
 import com.example.android.todo_list.Screens.Entity.Note;
@@ -83,6 +86,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         if (id == R.id.notes_delete){
             noteViewModel.deleteAll();
+        }
+        // About Page
+        if (id == R.id.about){
+            Intent i = new Intent(getApplicationContext(), About.class);
+            startActivity(i);
         }
         return true;
     }
